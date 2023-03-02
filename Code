@@ -29,3 +29,52 @@ AnAdm int,
 IdProfesor int FOREIGN KEY REFERENCES Profesor(IdProfesor),
 IdSpec int FOREIGN KEY REFERENCES Spec(IdSpec) 
 )
+
+CREATE TABLE ObjStud(
+IdObjStud int PRIMARY KEY,
+NmObjStud char(50),
+IdCatedra int FOREIGN KEY REFERENCES Catedre(IdCatedra)
+)
+
+CREATE TABLE Raion(
+IdRaion int PRIMARY KEY,
+NmRaion char(50),
+)
+
+CREATE TABLE Localitate(
+IdLocalitate int PRIMARY KEY,
+NmLocalitate char(50),
+IdRaion int FOREIGN KEY REFERENCES Raion(IdRaion)
+)
+
+CREATE TABLE Student(
+IdStudent int PRIMARY KEY,
+NmStudent char(50),
+PrenStudent char(50),
+PatrStudent char(50),
+SexStudent char(1),
+DataNS date,
+GSM char(10),
+IdGrupa int FOREIGN KEY REFERENCES Grupa(IdGrupa),
+IdLocalitate int FOREIGN KEY REFERENCES Localitate(IdLocalitate)
+)
+
+CREATE TABLE ObjStGr(
+IdObjStGr int PRIMARY KEY,
+IdGrupa int FOREIGN KEY REFERENCES Grupa(IdGrupa),
+IdObjStud int FOREIGN KEY REFERENCES ObjStud(IdObjStud),
+IdProfesor int FOREIGN KEY REFERENCES Profesor(IdProfesor)
+)
+
+CREATE TABLE Note(
+IdNote int PRIMARY KEY,
+IdStudent int FOREIGN KEY REFERENCES Student(IdStudent)
+)
+
+CREATE TABLE Orar(
+Cabinet int PRIMARY KEY,
+IdGrupa int FOREIGN KEY REFERENCES Grupa(IdGrupa),
+IdObjStud int FOREIGN KEY REFERENCES ObjStud(IdObjStud),
+IdProfesor int FOREIGN KEY REFERENCES Profesor(IdProfesor),
+NrPereche int
+)
