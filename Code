@@ -16,7 +16,7 @@ NmCatedre char(50)
 
 
 CREATE TABLE Profesor(
-IdProfesor int PRIMARY KEY,
+IdProfesor bigint PRIMARY KEY,
 NmProfesor char(50),
 IdCatedra int FOREIGN KEY REFERENCES Catedre(IdCatedra)
 )
