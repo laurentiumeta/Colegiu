@@ -1,4 +1,3 @@
-
 USE MASTER 
 GO
 CREATE DATABASE Colegiu
@@ -10,9 +9,16 @@ IdSpec int PRIMARY KEY,
 NmSpec char(30)
 )
 
+CREATE TABLE Catedre(
+IdCatedra int PRIMARY KEY,
+NmCatedre char(50)
+)
+
+
 CREATE TABLE Profesor(
 IdProfesor int PRIMARY KEY,
-NmProfesor char(50)
+NmProfesor char(50),
+IdCatedra int FOREIGN KEY REFERENCES Catedre(IdCatedra)
 )
 
 
