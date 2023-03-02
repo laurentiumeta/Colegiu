@@ -1,1 +1,25 @@
 
+USE MASTER 
+GO
+CREATE DATABASE Colegiu
+GO
+USE Colegiu
+GO
+CREATE TABLE Spec(
+IdSpec int PRIMARY KEY,
+NmSpec char(30)
+)
+
+CREATE TABLE Profesor(
+IdProfesor int PRIMARY KEY,
+NmProfesor char(50)
+)
+
+
+CREATE TABLE Grupa(
+IdGrupa int PRIMARY KEY,
+NmGrupa char(30),
+AnAdm int,
+IdProfesor int FOREIGN KEY REFERENCES Profesor(IdProfesor),
+IdSpec int FOREIGN KEY REFERENCES Spec(IdSpec) 
+)
