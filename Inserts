@@ -1,1 +1,11 @@
 
+INSERT INTO Spec (IdSpec , NmSpec , profil)
+VALUES
+(978562 , 'Administrarea aplicațiilor web' , 'Real'),
+(123450 , 'Programarea și analiza produselor program' , 'Real'),
+(758431 , 'Administrarea bazelor de date' , 'Real'),
+(985722 , 'Rețele de calculatoare', 'Real'),
+(894853 , 'Contabilitate' , 'Real'),
+(556347 , 'Jurisprudență' , 'Umanist'),
+(885933 , 'Servicii administrative și de secretariat' , 'Umanist'),
+(560033 , 'Operator pentru suportul tehnic al calculatoarelor' , 'Real');
