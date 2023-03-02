@@ -9,3 +9,15 @@ VALUES
 (556347 , 'Jurisprudență' , 'Umanist'),
 (885933 , 'Servicii administrative și de secretariat' , 'Umanist'),
 (560033 , 'Operator pentru suportul tehnic al calculatoarelor' , 'Real');
+
+INSERT INTO Catedre(IdCatedra, NmCatedre)
+VALUES (1, 'Informatică'),
+(2, 'Informatică Aplicată'),
+(3, 'Economie'),
+(4, 'Servicii administrative'),
+(5, 'Limbi străine'),
+(6, 'Informatică'),
+(7, 'Matematică'),
+(8, 'Stiinte socioumanistice'),
+(9, 'Limba si literatura română'),
+(10, 'Biologie, chimie si fizică');
