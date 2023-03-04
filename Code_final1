@@ -1,0 +1,186 @@
+USE MASTER 
+GO
+IF EXISTS(SELECT'True' FROM SYS.DATABASES WHERE NAME='Colegiu')
+BEGIN
+DROP DATABASE Colegiu
+END
+Create Database Colegiu
+GO
+USE Colegiu
+GO
+CREATE TABLE Spec(
+IdSpec int PRIMARY KEY,
+NmSpec char(100),
+profil CHAR(30)
+)
+
+CREATE TABLE Catedre(
+IdCatedra int PRIMARY KEY,
+NmCatedre char(50)
+)
+
+
+CREATE TABLE Profesor(
+IdProfesor bigint PRIMARY KEY,
+NmProfesor char(50),
+IdCatedra int FOREIGN KEY REFERENCES Catedre(IdCatedra)
+)
+
+
+CREATE TABLE Grupa(
+IdGrupa int PRIMARY KEY,
+NmGrupa char(30),
+AnAdm int,
+IdProfesor bigint FOREIGN KEY REFERENCES Profesor(IdProfesor),
+IdSpec int FOREIGN KEY REFERENCES Spec(IdSpec) 
+)
+
+CREATE TABLE ObjStud(
+IdObjStud int PRIMARY KEY,
+NmObjStud char(50),
+IdCatedra int FOREIGN KEY REFERENCES Catedre(IdCatedra)
+)
+
+CREATE TABLE Raion(
+IdRaion int PRIMARY KEY,
+NmRaion char(50),
+)
+
+CREATE TABLE Localitate(
+IdLocalitate int PRIMARY KEY,
+NmLocalitate char(50),
+IdRaion int FOREIGN KEY REFERENCES Raion(IdRaion)
+)
+
+CREATE TABLE Student(
+IdStudent int PRIMARY KEY,
+NmStudent char(50),
+PrenStudent char(50),
+PatrStudent char(50),
+SexStudent char(1),
+DataNS date,
+GSM char(10),
+IdGrupa int FOREIGN KEY REFERENCES Grupa(IdGrupa),
+IdLocalitate int FOREIGN KEY REFERENCES Localitate(IdLocalitate)
+)
+
+CREATE TABLE ObjStGr(
+IdObjStGr int PRIMARY KEY,
+IdGrupa int FOREIGN KEY REFERENCES Grupa(IdGrupa),
+IdObjStud int FOREIGN KEY REFERENCES ObjStud(IdObjStud),
+IdProfesor bigint FOREIGN KEY REFERENCES Profesor(IdProfesor)
+)
+
+CREATE TABLE Note(
+IdNote int PRIMARY KEY,
+IdStudent int FOREIGN KEY REFERENCES Student(IdStudent)
+)
+
+CREATE TABLE Orar(
+Cabinet int PRIMARY KEY,
+IdGrupa int FOREIGN KEY REFERENCES Grupa(IdGrupa),
+IdObjStud int FOREIGN KEY REFERENCES ObjStud(IdObjStud),
+IdProfesor bigint FOREIGN KEY REFERENCES Profesor(IdProfesor),
+NrPereche int
+)
+INSERT INTO Spec (IdSpec , NmSpec , profil)
+VALUES
+(978562 , 'Administrarea aplicațiilor web' , 'Real'),
+(123450 , 'Programarea și analiza produselor program' , 'Real'),
+(758431 , 'Administrarea bazelor de date' , 'Real'),
+(985722 , 'Rețele de calculatoare', 'Real'),
+(894853 , 'Contabilitate' , 'Real'),
+(556347 , 'Jurisprudență' , 'Umanist'),
+(885933 , 'Servicii administrative și de secretariat' , 'Umanist'),
+(560033 , 'Operator pentru suportul tehnic al calculatoarelor' , 'Real');
+
+INSERT INTO Catedre(IdCatedra, NmCatedre)
+VALUES (1, 'Informatică'),
+(2, 'Informatică Aplicată'),
+(3, 'Economie'),
+(4, 'Servicii administrative'),
+(5, 'Limbi străine'),
+(6, 'Informatică'),
+(7, 'Matematică'),
+(8, 'Stiinte socioumanistice'),
+(9, 'Limba si literatura română'),
+(10, 'Biologie, chimie si fizică');
+
+INSERT INTO Profesor
+VALUES 
+(1234567811234 , 'Gabura Nadejda' , 1),
+(1002075704567 ,'Musteata Victoria' , 1 ),
+(1021522777939 ,'Botosanu Mihai' ,1),
+(7202907118082, 'Obada Liuba',1),
+(1044004607305, 'Ciobanu Andrei ',1),
+(1101815028251 ,'Railean Alexandru ',1),
+(1001261657422 ,'Cazacu Doina ',1),
+(1000781915457 ,'Golub Andrian' ,1 ),
+(1001644380569 , 'Gribineţ Luminita' ,1),
+(2093889121300 , 'Musteata Mihaela',1),
+(1002133884067 , 'Dascal Andrian' ,1 ),
+(1001399300717 , 'Frunză Olga' ,1),
+(1021922641297 , 'Perjan Tatiana' ,2),
+(1003302649703, 'Cazacu Doinita',2),
+(1000281911407 ,'Savi Vale',2),
+(1001922641297 , 'Vanovscaia Veruta',2),
+(9020334343432 , 'Dobrovolschi Olga' ,2),
+(2004538999992 , 'Oprea Anton' ,2 ),
+(6737838478313 , 'Spinei Constea' ,2),
+(2037747828823 , 'Cojocaru Natalia' ,2),
+(1902929292923 ,'Ion Damaschain',2),
+(2556161617224 , 'Popoescu Lorento' , 2),
+(1092929292225 , 'Simboteanu Eugenia',2),
+(1425252526669 , 'Tanasiv Natalia' ,3) ,
+(4099891212111 , 'Dobre Alin',3),
+(1002939483832 , 'dumneanu Ala',3),
+(1820009821999 , 'Ceban Aurica',3),
+(2003492823921 , 'Popa Aliona',3),
+(2030001920000 , 'Bespalco Elena' ,3),
+(1002939400012 , 'Olari Ana',3),
+(2003958110000 , 'Cozirev Doina',3),
+(1029300192944 , 'Diaconu Tatiana',3),
+(9010029393442 , 'Telecva Natalia',4),
+(1002920001938 , 'Bratescu Oxana',4),
+(3092235899111 , 'Oxanu Anastasia',4),
+(1092000192033 , 'Osoianu Viorica',4),
+(1902000049000 , 'Cuznetov Alex',4),
+(1092200091000 , 'Grogrev Elena' , 4),
+(1029930010009 , 'Croitoru Ion',4),
+(2039001950003 , 'Cucuta Octavian',4),
+(1002100929402 , 'Chisniciuc Mariana',5),
+(1090129483933 , 'Turcanu Elena',5),
+(8291003933432 , 'Paduraru Dorin',5),
+(1902383834222 , 'Popovici Doina',5),
+(3029177740000 , 'Voda Vadim',5),
+(4092399991099 , 'Cozma Valeria',5),
+(1999990923343 , 'Manea Constantin',5),
+(1959110903343 , 'Simba Cornel',5),
+(3902901990911 , 'Mihalas Ion',6),
+(5200001992921 , 'Petrovshi Ana',6),
+(3092992000293 , 'Paiu Ala',6),
+(4290192199911 , 'Bereza Sandu',6),
+(2093001911029 , 'Beleschi Alexandru',6),
+(1290003000992 , 'Tudorean T',6),
+(1210303500992 , 'Tudorean Nicu',6),
+(3912223093909 , 'Badragan Costantin',7),
+(2109290039994 , 'Poluci Tatiana' , 7 ),
+(3812009909445 , 'Andretchi V.',7),
+(4002948883220 , 'Faina Valeria',7),
+(2039000121993 , 'Savin Valeriu',7),
+(4200183999990 , 'Botnariuc Laur',7),
+(2100439021121 , 'Luca Sveta',7),
+(3094902312124 , 'Dermenji Stas',7),
+(3912388438433 , 'Munteanu Valerian',7),
+(5092938112121 , 'Cebotari Stanislav',7),
+(3094903903431 , 'Doina Lupu',8),
+(1288392999209 , 'Dogaru Veronica',8),
+(3110902938322 , 'Carchilan Nelea',8),
+(2081922290923 , 'Midoni tatiana',8),
+(1290022666789 , 'Botnari Larisa',8),
+(3900566623299 , 'Cojocaru Cornelia',8),
+(1526663270092 , 'Golic Tatiana',9),
+(3009092329011 , 'David Sveta',9),
+(2091120909334 , 'Leorda Ada',9),
+(7280091092111 , 'Golic Larisa',9),
+(2093029348392 , 'Moraru Lena',9);
