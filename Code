@@ -1,12 +1,17 @@
 USE MASTER 
 GO
-CREATE DATABASE Colegiu
+IF EXISTS(SELECT'True' FROM SYS.DATABASES WHERE NAME='Colegiu')
+BEGIN
+DROP DATABASE Colegiu
+END
+Create Database Colegiu
 GO
 USE Colegiu
 GO
 CREATE TABLE Spec(
 IdSpec int PRIMARY KEY,
-NmSpec char(30)
+NmSpec char(30),
+profil CHAR(30)
 )
 
 CREATE TABLE Catedre(
@@ -26,7 +31,7 @@ CREATE TABLE Grupa(
 IdGrupa int PRIMARY KEY,
 NmGrupa char(30),
 AnAdm int,
-IdProfesor int FOREIGN KEY REFERENCES Profesor(IdProfesor),
+IdProfesor bigint FOREIGN KEY REFERENCES Profesor(IdProfesor),
 IdSpec int FOREIGN KEY REFERENCES Spec(IdSpec) 
 )
 
@@ -63,7 +68,7 @@ CREATE TABLE ObjStGr(
 IdObjStGr int PRIMARY KEY,
 IdGrupa int FOREIGN KEY REFERENCES Grupa(IdGrupa),
 IdObjStud int FOREIGN KEY REFERENCES ObjStud(IdObjStud),
-IdProfesor int FOREIGN KEY REFERENCES Profesor(IdProfesor)
+IdProfesor bigint FOREIGN KEY REFERENCES Profesor(IdProfesor)
 )
 
 CREATE TABLE Note(
@@ -75,6 +80,6 @@ CREATE TABLE Orar(
 Cabinet int PRIMARY KEY,
 IdGrupa int FOREIGN KEY REFERENCES Grupa(IdGrupa),
 IdObjStud int FOREIGN KEY REFERENCES ObjStud(IdObjStud),
-IdProfesor int FOREIGN KEY REFERENCES Profesor(IdProfesor),
+IdProfesor bigint FOREIGN KEY REFERENCES Profesor(IdProfesor),
 NrPereche int
 )
