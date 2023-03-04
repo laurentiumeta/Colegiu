@@ -10,7 +10,7 @@ USE Colegiu
 GO
 CREATE TABLE Spec(
 IdSpec int PRIMARY KEY,
-NmSpec char(30),
+NmSpec char(100),
 profil CHAR(30)
 )
 
